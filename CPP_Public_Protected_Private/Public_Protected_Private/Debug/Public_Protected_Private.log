@@ -1,0 +1,20 @@
+﻿Build started 27.04.2016 13:02:42.
+     1>Project "E:\Университет\TEMP_LESSON\TEMP_my_tests_lessons\Public_Protected_Private\Public_Protected_Private\Public_Protected_Private.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\Public_Protected_Private.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+       Manifest:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\Public_Protected_Private.unsuccessfulbuild".
+         Touching "Debug\Public_Protected_Private.lastbuildstate".
+     1>Done Building Project "E:\Университет\TEMP_LESSON\TEMP_my_tests_lessons\Public_Protected_Private\Public_Protected_Private\Public_Protected_Private.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.05

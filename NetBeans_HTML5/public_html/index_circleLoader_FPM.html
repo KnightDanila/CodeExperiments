@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- My StatusBar -->
+        <link rel="stylesheet" href="js/loadingStatusBarCircle/loadingStatusBarCircle.css">
+        <script src="js/loadingStatusBarCircle/loadingStatusBarCircle.js"></script>
+
+        <link rel="stylesheet" href="js/loadingSpinner/spinnerFPM.css">
+    </head>
+    <body>
+    <center>
+        <div>Факультет Прикладной Математики ДНУ</div>
+        <div>Выполнил: Егошкин Данила Игоревич</div>
+    </center>
+    <center>
+        <br>
+
+        <div class="loader-circle">
+            <div id="loaderCircleLeft" class="loader-circle-left"></div>
+            <div id="loaderCircleRight" class="loader-circle-right"></div>
+            <div class="spinner-fpm"></div>
+        </div>
+        <div id="loaderCircleLabel" class="loader-circle-label">100%</div>
+    </center>
+    <script>
+        var i = 0;
+        setInterval(function () {
+            if (i !== 100) {
+                i++;
+            }
+            loaderCircleType0(i, 100);
+        }, 100);
+
+    </script>
+</body>
+</html>

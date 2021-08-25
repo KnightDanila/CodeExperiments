@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* The Modal (background) */
+            .modal-window {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1000; /* Sit on top */
+                padding-top: 5%; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color Black */
+                background-color: rgba(0,0,0,0.4); /* If opacity work it will be like gloss*/
+            }
+        </style>
+        <style>
+            /* Modal Window addons: Content styles */
+            .MW-content-simple {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            /* The Close Button */
+            .MW-close-btn-simple {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .MW-close-btn-simple:hover,
+            .MW-close-btn-simple:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .MW-content-monokai {
+                background-color: rgb(39, 40, 34);
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                color: rgb(102, 217, 239);
+            }
+            .MW-content-ant {
+                background-color: rgb(21, 12, 11);
+                margin: auto;
+                padding: 20px;
+                width: 80%;
+                color: rgb(169, 202, 53);
+                -webkit-box-shadow: 0px 8px 56px 4px rgba(0,0,0,0.75);
+                -moz-box-shadow: 0px 8px 56px 4px rgba(0,0,0,0.75);
+                box-shadow: 0px 8px 56px 4px rgba(0,0,0,0.75);
+            }
+            .MW-content-lightBlueLaser {
+                background-color: rgb(27, 28, 31);
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                color: rgb(0, 255, 255);
+            }
+            .MW-content-fpm3d-dark {
+                background-color: rgb(27, 28, 31);
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #0FF;
+                width: 80%;
+                color: white;
+                -webkit-box-shadow: 0px 8px 56px 4px rgba(0,255,255,0.75);
+                -moz-box-shadow: 0px 8px 56px 4px rgba(0,255,255,0.75);
+                box-shadow: 0px 8px 56px 4px rgba(0,255,255,0.75);
+            }
+            /* The Close Button */
+            .MW-close-btn-fpm3d-dark{
+                color: #fff;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .MW-close-btn-fpm3d-dark:hover,
+            .MW-close-btn-fpm3d-dark:focus {
+                color: #0ff;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .MW-content-fpm3d-white {
+                background-color: white;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                color: black;
+                -webkit-box-shadow: 0px 8px 56px 4px rgba(0,255,255,0.75);
+                -moz-box-shadow: 0px 8px 56px 4px rgba(0,255,255,0.75);
+                box-shadow: 0px 8px 56px 4px rgba(0,255,255,0.75);
+            }
+            /* The Close Button */
+            .MW-close-btn-fpm3d-white {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .MW-close-btn-fpm3d-white:hover,
+            .MW-close-btn-fpm3d-white:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div>TODO write content</div>
+
+        <h2>Modal Example</h2>
+
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+
+        <!-- The Modal -->
+        <div id="myModal">
+            <!-- Modal content -->
+            <div id = "modalContent">
+                <div id = "close">X</div>
+                <p>Some text in the Modal..</p>
+            </div>
+        </div>
+
+
+        <script>
+
+            modalWindowInit("myModal", "modalContent", "myBtn", "close");
+            modalWindowTotalCloseBackground();
+            modalWindowAddCloseElemStyle("close", "MW-close-btn-fpm3d-dark");
+
+            // One global weriable
+            var MW_OPEN_ONCE = 0;
+            // Create from simple objects a modal windows. Itself adds styles
+            function modalWindowInit(winElemID, winElemContentID, openElemID, closeElemID) {
+                // Get the modal
+                var modal = document.getElementById(winElemID);
+                // Get the button that opens the modal
+                var btn = document.getElementById(openElemID);
+                // Get the <span> element that closes the modal
+                var span = document.getElementById(closeElemID);
+                // Get the modal content
+                var content = document.getElementById(winElemContentID);
+
+                content.className += "MW-content-simple";
+                modal.className += "modal-window";
+                span.className += "MW-close-btn-simple";
+                // When the user clicks the button, open the modal 
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function () {
+                    modal.style.display = "none";
+                    MW_OPEN_ONCE = 1;
+                }
+
+                content.onclick = function () {
+                    MW_OPEN_ONCE = 1;
+                }
+            }
+            function modalWindowInitFull(winElemID, winElemContentID, winElemContentStyle,
+                                    openElemID, closeElemID, closeElemStyle) {
+                // Get the modal
+                var modal = document.getElementById(winElemID);
+                // Get the button that opens the modal
+                var btn = document.getElementById(openElemID);
+                // Get the <span> element that closes the modal
+                var span = document.getElementById(closeElemID);
+                // Get the modal content
+                var content = document.getElementById(winElemContentID);
+
+                modal.className += "modal-window";
+                content.className += winElemContentStyle;
+                span.className += closeElemStyle;
+                // When the user clicks the button, open the modal 
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function () {
+                    modal.style.display = "none";
+                    MW_OPEN_ONCE = 1;
+                }
+
+                content.onclick = function () {
+                    MW_OPEN_ONCE = 1;
+                }
+            }
+            // Add style function
+            function modalWindowAddCloseElemStyle(closeElemID, ClassName) {
+                var span = document.getElementById(closeElemID);
+                span.className += " " + ClassName;
+            }
+            function modalWindowAddContentStyle(contentElemID, ClassName) {
+                var content = document.getElementById(contentElemID);
+                content.className += " " + ClassName;
+            }
+            // When the user clicks anywhere outside of the modal, close it
+            function modalWindowTotalCloseBackground() {
+                var total = document.getElementsByClassName("modal-window").length;
+                var model;
+                for (var i = 0; i < total; i++) {
+                    model = document.getElementsByClassName("modal-window")[i];
+                    model.onclick = function () {
+                        if (!MW_OPEN_ONCE) {
+                            model.style.display = "none";
+                        }
+                        MW_OPEN_ONCE = 0;
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>

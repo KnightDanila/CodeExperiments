@@ -1,0 +1,7 @@
+﻿  MainAMCBridge.cpp
+E:\Learn It\GreatWork\Give_TestProjectsOnAllLanguages\CPP_TESTs\TESTs\MainAMCBridge.cpp(230,12): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+E:\Learn It\GreatWork\Give_TestProjectsOnAllLanguages\CPP_TESTs\TESTs\MainAMCBridge.cpp(227,15): error C3615: результатом функции constexpr "third" не может являться константное выражение
+E:\Learn It\GreatWork\Give_TestProjectsOnAllLanguages\CPP_TESTs\TESTs\MainAMCBridge.cpp(228,7): message : сбой был вызван неопределенной функцией или функцией, не объявленной как "constexpr"
+E:\Learn It\GreatWork\Give_TestProjectsOnAllLanguages\CPP_TESTs\TESTs\MainAMCBridge.cpp(228,7): message : см. использование "std::operator <<"
+E:\Learn It\GreatWork\Give_TestProjectsOnAllLanguages\CPP_TESTs\TESTs\MainAMCBridge.cpp(230,12): message : сбой был вызван неопределенной функцией или функцией, не объявленной как "constexpr"
+E:\Learn It\GreatWork\Give_TestProjectsOnAllLanguages\CPP_TESTs\TESTs\MainAMCBridge.cpp(230,12): message : см. использование "exp"

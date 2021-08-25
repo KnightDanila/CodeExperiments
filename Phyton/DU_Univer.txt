@@ -1,0 +1,78 @@
+# your code goes here
+# https://www.wolframalpha.com/input/?i=%7B%7Ba_11%2Ca_12%2Ca_13%7D%2C%7Ba_21%2Ca_22%2Ca_23%7D%2C%7Ba_31%2Ca_32%2Ca_33%7D%7D.%7B%7Bx%2C0%2C0%7D%2C%7B0%2Cy%2C0%7D%2C%7B0%2C0%2Cz%7D%7D.transpose%7B%7Ba_11%2Ca_12%2Ca_13%7D%2C%7Ba_21%2Ca_22%2Ca_23%7D%2C%7Ba_31%2Ca_32%2Ca_33%7D%7D
+ 
+import math as m
+ksi = 45 * m.pi / 180
+teta = 45 * m.pi / 180
+fi = 45 * m.pi / 180
+ 
+tenz1 = 1, 1, 1
+ 
+def rotate(Ix, Iy, Iz, ksi, teta, fi):
+	a11 = m.cos(ksi)*m.cos(fi) - m.sin(fi)*m.sin(ksi)*m.cos(teta) 
+	a12 = m.cos(fi)*m.sin(ksi) + m.sin(fi)*m.cos(ksi)*m.cos(teta) 
+	a13 = m.sin(fi)*m.sin(teta)
+ 
+	a21 =-m.sin(fi)*m.cos(ksi) - m.cos(fi)*m.sin(ksi)*m.cos(teta) 
+	a22 =-m.sin(fi)*m.sin(ksi) + m.cos(fi)*m.cos(ksi)*m.cos(teta) 
+	a23 = m.cos(fi)*m.sin(teta)
+ 
+	a31 = m.sin(ksi)*m.sin(teta) 
+	a32 =-m.cos(ksi)*m.sin(teta) 
+	a33 = m.cos(teta) 
+ 
+ 
+	Ixx = Ix * a11 * a11 + Iy * a12 * a12 + Iz * a13 * a13
+	Iyy = Ix * a21 * a21 + Iy * a22 * a22 + Iz * a23 * a23
+	Izz = Ix * a31 * a31 + Iy * a32 * a32 + Iz * a33 * a33
+	Ixy = Ix * a11 * a21 + Iy * a12 * a22 + Iz * a13 * a23
+	Ixz = Ix * a11 * a21 + Iy * a12 * a22 + Iz * a13 * a23
+	Iyz = Ix * a21 * a31 + Iy * a22 * a32 + Iz * a23 * a33
+ 
+	return Ixx,	Iyy, Izz, Ixy, Ixz, Iyz
+ 
+ 
+def eiler(ksi, teta, fi):
+	return ksi  * m.pi / 180, teta * m.pi / 180, fi * m.pi / 180
+ 
+def rectan(m, h, w, d):
+	return m*(w**2 + d**2)/12, m*(h**2 + d**2)/12, m*(h**2 + w**2)/12
+ 
+def cylindr(m, r, h):
+	return m*(r**2 + h**2)/12, m*(r**2 + h**2)/12, (m * r**2)  / 12
+ 
+def steiner(m, Ixx, Iyy, Izz, Ixy, Ixz, Iyz, x, y, z):
+	Ixx += m * (y**2 + z**2)
+	Iyy += m * (x**2 + z**2)
+	Izz += m * (x**2 + y**2)
+	Ixy -= m * x * y
+	Ixz -= m * x * z
+	Iyz -= m * y * z
+ 
+	return Ixx,	Iyy, Izz, Ixy, Ixz, Iyz
+ 
+ 
+print(rotate(*tenz1, ksi, teta, fi))
+print()
+print(rotate(*rectan(1, 1, 2, 3), *eiler(30, 90, 0)))
+print()
+print(rotate(*cylindr(1, 1, 2 ), *eiler(60, 30, 90)))
+ 
+print()
+mm = 1
+ 
+ 
+ 
+print(steiner(mm, *rotate(*cylindr(mm, 1, 2 ), *eiler(60, 30, 90)), 2, 3, 4))
+print(steiner(mm, *rotate(*cylindr(mm, 1, 2 ), *eiler(180, 0, 0)), 0, 0, 0))
+print()
+print(rotate(*cylindr(mm, 1, 2 ), *eiler(70, 30, 30)))
+ 
+Close
+Sphere Research Labs. Ideone is powered by Sphere Engineô
+„Î‡‚Ì‡ˇ api widget faq credits desktop mobile
+terms of service privacy policy gdpr info
+
+Feedback & Bugs
+ Not using Hotjar yet?
+Select an element on the page.

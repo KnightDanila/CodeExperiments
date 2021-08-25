@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07.06.2016, 1:55:01
+    Author     : KnightDanila
+*/
+/**
+    How to use it:
+    IN HTML
+        <div class="loader-circle">
+            <div id="loaderCircleLeft" class="loader-circle-left"></div>
+            <div id="loaderCircleRight" class="loader-circle-right"></div>
+        </div>
+        <div id="loaderCircleLabel" class="loader-circle-label">100%</div>
+
+    THEN IN JS
+    loaderCircleType0(currentValue, maxValue);
+
+    ALSO NEED 
+    <link rel="stylesheet" href="js/loadingStatusBarCircle/loadingStatusBarCircle.css">
+    <script src="js/loadingStatusBarCircle/loadingStatusBarCircle.js"></script>
+**/
+
+.loader-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(178, 178, 178);
+}
+
+.loader-circle-left {
+    margin-top: -5px;
+    margin-left: -5px;
+    position: absolute; /* Абсолютное позиционирование */
+    /*<shape> = rect(<top>, <right>, <bottom>, <left>)*/
+    clip: rect(-50px, -50px, 250px, -50px); 
+    /*clip: rect(-50px, 110px, 250px, -50px);*/
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(255, 30, 255);
+    box-shadow: -1px 0px 32px 1px rgba(255,0,255,0.59), inset -1px 0px 32px 1px rgba(255,0,255,0.59);
+}
+
+.loader-circle-right {
+    margin-top: -5px;
+    margin-left: -5px;
+    position: absolute; /* Абсолютное позиционирование */
+    /*<shape> = rect(<top>, <right>, <bottom>, <left>)*/
+    clip: rect(-50px, 250px, 250px, 250px); 
+    /*clip: rect(-50px, 310px, 250px, 100px);*/
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(58, 160, 206);
+    box-shadow: -1px 0px 32px 1px rgba(0,255,255,0.59), inset -1px 0px 32px 1px rgba(0,255,255,0.59);
+
+}
+
+.loader-circle-label{
+    text-align: center;
+}
