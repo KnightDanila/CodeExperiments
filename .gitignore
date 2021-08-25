@@ -23,6 +23,9 @@
 *.svclog
 *.scc
 
+# log
+*.tlog
+
 # Visual C++ cache files
 ipch/
 *.aps
