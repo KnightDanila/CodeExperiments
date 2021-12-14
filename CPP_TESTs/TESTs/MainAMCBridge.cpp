@@ -44,9 +44,31 @@ int main() {
 	cout<<*x<<endl;
 	cout<<y<<endl;
 
-	LOG->println("x", x);
-	LOG->println("&x", &x);
+	LOG->println("*x", *x); // Value of first elem in x array
+	LOG->println("x", x); // address of x
+	LOG->println("&*x", &*x); // address of x
+	LOG->println("&x", &x); // What is that??? //is it reference to address??? Is it legal? 
+	LOG->println("*(&x)", *(&x));  // address of x
 
+
+	int z = 0;
+	int& r = z;
+	int* p1 = &z;
+	int* p2 = &r;
+	int* p3 = new int(5);
+
+	LOG->println("p1", p1); // address of z
+	LOG->println("p2", p2); // address of z
+	LOG->println("p3", p3); // address of new int(5)
+	LOG->println("&p1", &p1); // address of pointer p1
+	LOG->println("&p2", &p2); // address of pointer p2
+	LOG->println("&p3", &p3); // address of pointer p3
+	LOG->println("&p1[0]", &p1[0]); // address of z
+	LOG->println("&p2[0]", &p2[0]); // address of z
+	LOG->println("&p3[0]", &p3[0]); // address of new int(5)
+
+	//assert(p == p2); // &x == &r
+	//assert(&p != &p2);
 
 	int *x1 = new int[5];
 	int y1[5];
@@ -59,7 +81,7 @@ int main() {
 	return 0;
 }
 /**/
-/**/
+/**
 
 void printArr(char *arr)
 {
@@ -228,6 +250,17 @@ int main() {
 	https://www.youtube.com/watch?v=Byqcrhc5tLE
 */
 /**
+
+int True() {
+	cout << "True \n";
+	return true;
+}
+
+int False() {
+	cout << "False \n";
+	return false;
+}
+
 int first() {
 	cout << "first \n";
 	return 1;
@@ -259,6 +292,11 @@ int sumFun(int a, int b) {
 }
 
 int main() {
+
+	int secret = rand() % 10 + 1; // от 1-10
+
+	cout << secret << endl << endl;
+
 	cout << "sumFun(first(), second());" << endl;
 	sumFun(first(), second());
 	cout << endl;
@@ -280,6 +318,26 @@ int main() {
 	if ((first() && second() && first()) || third())
 	{ }
 	cout << endl;
+
+
+	cout << "if ( True() && True() && True() && False() )" << endl;
+	if (True() && True() && True() && False())
+	{
+	}
+	cout << endl;
+
+	cout << "if ( False() && True() && True() && True() )" << endl;
+	if (False() && True() && True() && True())
+	{
+	}
+	cout << endl;
+
+	cout << "if ( False() || False() || True() || False() )" << endl;
+	if (False() || False() || True() || False())
+	{
+	}
+	cout << endl;
+
 
 	return 0;
 }
@@ -780,3 +838,340 @@ int main()
 	return 0;
 }
 /**/
+
+/*
+	What is lvalues and rvalues in C++
+	https://www.youtube.com/watch?v=fbYknr-HPYE
+	Move Semantics in C++
+	https://www.youtube.com/watch?v=ehMg6zvXuMY
+*/
+/**
+
+//void printName(std::string name)
+//{
+//	std::cout << "lvalue: " << name << "\n";
+//}
+
+void printName(const std::string& name)
+{
+	std::cout << "lvalue: " << name << "\n";
+}
+
+void printName(std::string&& name) 
+{
+	std::cout << "rvalue: " << name << "\n";
+}
+
+int main() 
+{
+	std::string firstName = "Tony";
+	std::string lastName = "Stark";
+
+	std::string fullName = firstName + lastName;
+
+	printName(fullName);
+	printName(firstName + lastName);
+}
+
+/**/
+
+/*
+	Increment
+	i++
+*/
+/**
+int main()
+{
+	int i = 10;
+	int j = ++i;
+	int z = i++;
+	int q = 10;
+	q = q++;
+	q = ++q;
+	cout << "i = " << i << endl;
+	cout << "j = " << j << endl;
+	cout << "z = " << z << endl;
+	cout << "q = " << q << endl;
+	cout << "++q = " << ++q << endl;
+	cout << "q++ = " << q++ << endl;
+
+	cout << "q = " << q << endl;
+}
+/**/
+
+/*
+	std::move();
+	Move Semantics in C++
+	https://www.youtube.com/watch?v=ehMg6zvXuMY
+*/
+/**
+void swapRef(int& a, int& b) {
+	std::cout << "In swapRef" << endl;
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	int t = a;
+	a = b;
+	b = t;
+}
+
+void swapPtr(int* a, int* b) {
+	std::cout << "In swapPtr" << endl;
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	std::cout << "&*a" << &*a << endl;
+	std::cout << "&*b" << &*b << endl;
+	int *t = &*a;
+	//*a = *b;
+	//*b = *t;
+}
+
+void swapMove(int& a, int& b) {
+	std::cout << "In swapMove" << endl;
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	int t = std::move(a);
+	std::cout << "&t" << &t << endl;
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	std::cout << "t: " << t << endl;
+	std::cout << "a: " << a << endl;
+	a = std::move(b);
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	std::cout << "a: " << a << endl;
+	std::cout << "b: " << b << endl;
+	b = std::move(t);
+	std::cout << "&t" << &t << endl;
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	std::cout << "b: " << b << endl;
+	std::cout << "t: " << t << endl;
+}
+
+int main()
+{
+	int a = 3;
+	int b = 5;
+	std::cout << "&a" << &a << endl;
+	std::cout << "&b" << &b << endl;
+	std::cout << "a: " << a << " b: " << b << endl;
+	swapRef(a, b);
+	std::cout << "a: " << a << " b: " << b << endl;
+	swapPtr(&a, &b);
+	std::cout << "a: " << a << " b: " << b << endl;
+	swapMove(a, b);
+	std::cout << "a: " << a << " b: " << b << endl;
+
+
+}
+
+/**/
+
+/**
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Ukrainian");
+	double x[10] = { 5.1,7.2,2.4,5.1,11.2,12.2,10.1,4.8,2.3,1.5 };
+	double y[10] = { 18.7,28,16.2,25.5,34.1,44.2,35,23,8.1,10.7 };
+	double Stud[30] = { 12.71,4.303,3.182,2.776,2.571,2.447,2.365,2.306,2.262,2.228,
+		2.201,2.179,2.16,2.145,2.131,2.12,2.11,2.101,2.093,2.086,
+		2.08,2.074,2.069,2.064,2.06,2.056,2.052,2.048,2.045,2.042 };
+	double sum_x = 0, sum_y = 0, sum_xx = 0, sum_yy = 0, x_m = 0, y_m = 0,
+		sh_disp_x = 0, unsh_disp_x = 0, sh_dev_x = 0, unsh_dev_x = 0,
+		sh_disp_y = 0, unsh_disp_y = 0, sh_dev_y = 0, unsh_dev_y = 0,
+		disp_x, disp_y;
+	int n = 10;
+
+	cout << "1. Побудуємо дисперсiйну таблицю " << endl;
+	cout << "  i\txi\tyi\txi^2\tyi^2\n";
+	for (int i = 0; i < n; i++)
+	{
+		cout << "  " << i + 1 << "\t" << x[i] << "\t" << y[i] << "\t" << x[i] * x[i] << "\t" << y[i] * y[i] << endl;
+		sum_x += x[i];
+		sum_xx += x[i] * x[i];
+		sum_y += y[i];
+		sum_yy += y[i] * y[i];
+	}
+	cout << "Сумма " << "\t" << sum_x << "\t" << sum_y << "\t" << sum_xx << "\t" << sum_yy << endl;
+
+	cout << "\n2. Визначимо точковi оцiнки числових характеристик ВВ " << endl;
+	x_m = sum_x / n;
+	y_m = sum_y / n;
+	cout << " Оцiнка мат. очiкування x: " << x_m << endl;
+	cout << " Оцiнка мат. очiкування y: " << y_m << endl;
+
+	for (int i = 0; i < n; i++)
+	{
+		sh_disp_x = pow(x[i] - x_m, 2);
+		sh_disp_y = pow(y[i] - y_m, 2);
+		unsh_disp_x = pow(x[i] - x_m, 2);
+		unsh_disp_y = pow(y[i] - y_m, 2);
+	}
+
+	sh_disp_x /= n, sh_disp_y /= n;
+	unsh_disp_x /= n - 1, unsh_disp_y /= n - 1;
+	sh_dev_x = sqrt(sh_disp_x /= n);
+	sh_dev_y = sqrt(sh_disp_y /= n);
+	unsh_dev_x = sqrt(unsh_disp_x /= n);
+	unsh_dev_y = sqrt(unsh_disp_y /= n);
+
+	cout << " Змiщена оцiнка дисперсiї x: " << sh_disp_x << endl;
+	cout << " Змiщена оцiнка дисперсiї y: " << sh_disp_y << endl;
+	cout << " Незмiщена оцiнка дисперсiї x: " << unsh_disp_x << endl;
+	cout << " Незмiщена оцiнка дисперсiї y: " << unsh_disp_y << endl;
+	cout << " Змiщена оцiнка середньоквадратичного вiдхилення x: " << sh_dev_x << endl;
+	cout << " Змiщена оцiнка середньоквадратичного вiдхилення y: " << sh_dev_y << endl;
+	cout << " Незмiщена оцiнка середньоквадратичного вiдхилення x: " << unsh_dev_x << endl;
+	cout << " Незмiщена оцiнка середньоквадратичного вiдхилення y: " << unsh_dev_y << endl;
+
+	cout << "\n3. Знайдемо довiрчий iнтервал у випадку вiдомої дисперсiї" << endl;
+	cout << " Введiть вiдому дисперсiю x: ";
+	cin >> disp_x;
+	cout << " Довiрчий iнтервал x (" << x_m - 1.96 * disp_x << ";" << x_m + 1.96 * disp_x << ")" << endl;
+	cout << " Введiть вiдому дисперсiю y: ";
+	cin >> disp_y;
+	cout << " Довiрчий iнтервал y (" << y_m - 1.96 * disp_y << ";" << y_m + 1.96 * disp_y << ")" << endl;
+
+	cout << "\n4. Знайдемо довiрчий iнтервал у випадку вiдомої дисперсiї" << endl;
+	cout << " Довiрчий інтервал x (" << x_m - Stud[n - 2] * sh_dev_x / sqrt(n - 1) << ";" << x_m + Stud[n - 2] * sh_dev_x << ")" << endl;
+	cout << " Довiрчий інтервал y (" << y_m - Stud[n - 2] * sh_dev_y / sqrt(n - 1) << ";" << y_m + Stud[n - 2] * sh_dev_y << ")" << endl;
+	system("PAUSE");
+	return 0;
+}
+
+
+**/
+
+
+
+#include <iostream>
+#include <math.h>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+
+	double A[5][5];
+	double U[10][10];
+	double b_vek[5], x[5], y[10];
+	int n, k;
+	int i, j;
+	double temp;
+	n = 3;
+	double* d = new double[n] {0, 0, 0};
+
+label:
+	cout << "Введiть коефiцiєнти та вiльнi члени" << endl;
+
+	for (i = 0; i < n; i++)
+
+	{
+
+		for (j = 0; j < n; j++)
+
+		{
+
+			cout << "a[" << i + 1 << "," << j + 1 << "]= ";
+
+			cin >> A[i][j];
+
+		}
+
+		cout << "b[" << i + 1 << "]= ";
+
+		cin >> b_vek[i];
+
+	}
+	
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			cout << A[i][j] << " ";
+		}
+		cout << "   " << b_vek[i] << endl;
+	}
+	cout << endl;
+
+	for (i = 0; i < n; i++)
+		for (j = 0; j < n; j++)
+		{
+			U[i][j] = 0;
+		}
+	//перевірка на симетричність
+	for (i = 0; i < n; i++)
+		for (j = 0; j < n; j++)
+		{
+			if (A[i][j] != A[j][i])
+			{
+				cout << "матрица не семметричная" << endl;
+				goto label;
+			}
+		}
+
+	for (int i = 0; i < n; i++)
+	{
+		temp = 0;
+		for (int k = 0; k < i; k++)
+			temp = temp + U[k][i] * U[k][i];
+		U[i][i] = sqrt(A[i][i] - temp);
+		for (j = i; j < n; j++)
+		{
+			temp = 0;
+			for (k = 0; k < i; k++)
+				temp = temp + U[k][i] * U[k][j];
+			U[i][j] = (A[i][j] - temp) / U[i][i];
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		temp = 0;
+		for (int k = 0; k < i; k++)
+			temp = temp + U[k][i] * y[k];
+		y[i] = (b_vek[i] - temp) / U[i][i];
+	}
+	for (i = n - 1; i >= 0; i--)
+	{
+		temp = 0;
+		for (int k = i + 1; k < n; k++)
+			temp = temp + U[i][k] * x[k];
+		x[i] = (y[i] - temp) / U[i][i];
+	}
+
+	//Выводим решения
+	cout << "Result:" << endl;
+	for (i = 0; i < n; i++)
+		cout << "x" << i << "= " << x[i] << endl;
+	cout << endl;
+
+
+	cout << "Delta: " << endl;
+	for (int i = 0; i < n; i++)
+	{
+
+		for (int k = 0; k < n; k++)
+		{
+			d[i] += A[i][k] * x[k];
+
+		}
+		d[i] = d[i] - b_vek[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+
+		cout << "d" << i << "= " << fixed << setprecision(0) << abs(d[i]) << endl;
+	}
+	cout.unsetf(ios_base::fixed);
+	delete[] d;
+
+return 0;
+}
