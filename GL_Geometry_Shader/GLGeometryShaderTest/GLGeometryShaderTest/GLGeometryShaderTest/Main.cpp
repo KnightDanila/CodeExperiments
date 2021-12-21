@@ -4,13 +4,14 @@
 #include <glew.h>
 #include <glfw3.h>
 #include <freeglut.h>
+#include <glm\glm.hpp>
 
 #include "ShaderLoader.h"
 
 void createPointsBuffer();
 void renderScene();
 
-GLuint programID;
+GLShader shader;
 GLuint pointsBuffer;
 
 int main(int argc, char **argv) {
@@ -45,7 +46,7 @@ int main(int argc, char **argv) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	//need to be after glewInit(), otherwise got error
-	programID = LoadShaders("VertexShader.vs", "FragmentShader.fs", "GeometryShader.gs");
+	shader = GLShader("VertexShader.vs", "FragmentShader.fs", "GeometryShader.gs");
 
 	createPointsBuffer();
 
@@ -84,7 +85,7 @@ void renderScene() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//use the shader
-	glUseProgram(programID);
+	shader.use();
 
 	// Specify layout of point data
 	glEnableVertexAttribArray(0);
@@ -103,5 +104,9 @@ void renderScene() {
 
 	glDrawArrays(GL_POINTS, 0, 4);
 
+
+
 	glDisableVertexAttribArray(0);
+
+	glUseProgram(0);
 }

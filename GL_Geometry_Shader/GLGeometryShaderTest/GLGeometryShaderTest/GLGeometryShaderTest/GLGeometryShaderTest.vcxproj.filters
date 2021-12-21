@@ -27,4 +27,15 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="FragmentShader.fs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="GeometryShader.gs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="VertexShader.vs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
 </Project>
