@@ -8,7 +8,7 @@ layout(triangle_strip, max_vertices = 7) out;		//to draw rectangles
 //layout(line_strip, max_vertices = 64) out;			//to draw polygons with different number of sides
 
 //layout(triangle_fan, max_vertices = 5) out;
-
+uniform float time;
 
 in float vSides[];
 
@@ -54,6 +54,7 @@ void arrowPyramid4(vec4 position)
     EndPrimitive();
 }
 
+//vec3 testVector = vec3(sin(time), cos(time), -0.3);
 vec3 testVector = vec3(1, 0, 0);
 void arrowPyramid4Dir(vec4 position) //, vec4 direction)
 {    

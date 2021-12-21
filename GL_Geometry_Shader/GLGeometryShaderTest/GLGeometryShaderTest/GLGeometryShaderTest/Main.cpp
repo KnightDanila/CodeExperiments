@@ -86,7 +86,7 @@ void renderScene() {
 
 	//use the shader
 	shader.use();
-
+	shader.setFloat("time", glfwGetTime());
 	// Specify layout of point data
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, pointsBuffer);

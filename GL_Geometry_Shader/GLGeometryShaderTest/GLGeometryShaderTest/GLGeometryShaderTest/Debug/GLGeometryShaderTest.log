@@ -1,4 +1,5 @@
 ﻿  Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: APIENTRY: изменение макроопределения
 E:\Learn It\GreatWork\AMCBridge\SomeWork\GL_Geometry_Shader\GLGeometryShaderTest\GLGeometryShaderTest\ThirdParty\glfw3.h(123): message : см. предыдущее определение "APIENTRY"
+E:\Learn It\GreatWork\AMCBridge\SomeWork\GL_Geometry_Shader\GLGeometryShaderTest\GLGeometryShaderTest\GLGeometryShaderTest\Main.cpp(89,37): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
   GLGeometryShaderTest.vcxproj -> E:\Learn It\GreatWork\AMCBridge\SomeWork\GL_Geometry_Shader\GLGeometryShaderTest\GLGeometryShaderTest\Debug\GLGeometryShaderTest.exe
